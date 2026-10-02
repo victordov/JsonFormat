@@ -22,6 +22,14 @@ A Sublime Text 4 package that formats, minifies, converts, validates and folds *
 
 ## Installation
 
+### Package Control
+
+Open the Command Palette, run **Package Control: Install Package** and choose **JsonFormat**.
+
+Until the package is listed in the default channel, first run **Package Control: Add Repository** with `https://github.com/victordov/JsonFormat`.
+
+### Manually
+
 Clone the repository into Sublime's Packages directory (`Preferences → Browse Packages…`). The folder **must be named `JsonFormat`** because the settings menu refers to that path.
 
 ```sh
@@ -60,14 +68,18 @@ On an error, the status bar shows the message, the location is underlined with a
 
 ## Folding
 
-| Keys (macOS) | Windows / Linux | Command |
-|---|---|---|
-| `Cmd+Shift+-` | `Ctrl+Shift+-` | **Fold to level 1**: the root's members stay visible and each of their values collapses to `{…}` / `[…]` |
-| `Cmd+Shift+=` | `Ctrl+Shift+=` | **Unfold all** |
+No key bindings are installed by default. Run **Preferences: JsonFormat Key Bindings** from the Command Palette, which opens the suggested bindings next to your own key bindings, and copy the ones you want. For example, on macOS:
 
-These key bindings only apply in views whose syntax is JSON (`source.json`). On Windows, `Ctrl+Shift+=` normally decreases the font size; in JSON files it unfolds instead.
+```json
+{ "keys": ["super+shift+minus"], "command": "json_format_fold", "args": { "level": 1 },
+  "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+{ "keys": ["super+shift+equals"], "command": "json_format_unfold_all",
+  "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+```
 
-The Command Palette also has **Collapse to Level 1/2/3**, **Collapse All**, **Collapse/Expand at Caret** and **Expand All** (each caption also contains the word "Fold"/"Unfold", so searching for either works).
+On Windows and Linux use `ctrl` instead of `super`. The `selector` context limits the keys to JSON files.
+
+The Command Palette has **Collapse to Level 1/2/3**, **Collapse All**, **Collapse/Expand at Caret** and **Expand All** (each caption also contains the word "Fold"/"Unfold", so searching for either works).
 
 To open a block, click the arrow in the gutter or the `…` in the text. Inner blocks are folded first, so opening a block should show its children still folded, one level at a time. **Collapse/Expand at Caret** guarantees this: it opens the block on the caret's line and re-folds that block's children.
 
@@ -124,7 +136,7 @@ Any setting can be overridden for a project or a single view by adding the `json
 
 ### Custom commands and key bindings
 
-Apart from the two folding keys above, which only apply in JSON files, no key bindings are installed. `json_format_format` accepts `options` (any setting above), `minify`, and `whole_file`, so you can bind any variation:
+`json_format_format` accepts `options` (any setting above), `minify`, and `whole_file`, so you can bind any variation:
 
 ```json
 { "keys": ["ctrl+alt+j"], "command": "json_format_format",

@@ -1,10 +1,21 @@
 [
-    // Folding keys are in the platform keymaps; nothing else is bound by default.
-    // Copy an example into Preferences > Key Bindings to enable one:
+    // JsonFormat installs no key bindings. To use one, copy it into your own
+    // key bindings (Preferences > Package Settings > JsonFormat > Key Bindings)
+    // and uncomment it. On Windows/Linux use "ctrl" instead of "super".
     //
-    // { "keys": ["ctrl+alt+j"], "command": "json_format_format",
+    // Fold JSON to the first level / unfold everything (JSON files only):
+    // { "keys": ["super+shift+minus"], "command": "json_format_fold", "args": { "level": 1 },
+    //   "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+    // { "keys": ["super+shift+equals"], "command": "json_format_unfold_all",
     //   "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
     //
+    // Collapse/expand the block at the caret:
+    // { "keys": ["super+alt+minus"], "command": "json_format_toggle_fold",
+    //   "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+    //
+    // Format / minify:
+    // { "keys": ["ctrl+alt+j"], "command": "json_format_format",
+    //   "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
     // { "keys": ["ctrl+alt+shift+j"], "command": "json_format_format", "args": { "minify": true },
     //   "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
 ]
