@@ -1,0 +1,9 @@
+[
+    // Folding in JSON files. Overrides ctrl+shift+equals (decrease font size) in JSON files only.
+    { "keys": ["ctrl+shift+minus"], "command": "json_format_fold", "args": { "level": 1 },
+      "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+    { "keys": ["ctrl+shift+equals"], "command": "json_format_unfold_all",
+      "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+    { "keys": ["ctrl+shift+plus"], "command": "json_format_unfold_all",
+      "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+]

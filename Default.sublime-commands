@@ -1,0 +1,23 @@
+[
+    { "caption": "JsonFormat: Format", "command": "json_format_format" },
+    { "caption": "JsonFormat: Format and Sort Keys", "command": "json_format_format", "args": { "options": { "sort_keys": true } } },
+    { "caption": "JsonFormat: Minify", "command": "json_format_format", "args": { "minify": true } },
+    { "caption": "JsonFormat: Convert to Standard JSON", "command": "json_format_format", "args": { "options": { "strict_json": true } } },
+    { "caption": "JsonFormat: Minify to Standard JSON", "command": "json_format_format", "args": { "minify": true, "options": { "strict_json": true } } },
+    { "caption": "JsonFormat: Convert to JSON5", "command": "json_format_format", "args": { "options": { "quote_keys": "as-needed", "trailing_commas": "always" } } },
+    { "caption": "JsonFormat: Validate", "command": "json_format_validate" },
+    { "caption": "JsonFormat: Collapse to Level 1 (Fold)", "command": "json_format_fold", "args": { "level": 1 } },
+    { "caption": "JsonFormat: Collapse to Level 2 (Fold)", "command": "json_format_fold", "args": { "level": 2 } },
+    { "caption": "JsonFormat: Collapse to Level 3 (Fold)", "command": "json_format_fold", "args": { "level": 3 } },
+    { "caption": "JsonFormat: Collapse All (Fold Everything)", "command": "json_format_fold", "args": { "level": 0 } },
+    { "caption": "JsonFormat: Collapse/Expand at Caret (Toggle Fold)", "command": "json_format_toggle_fold" },
+    { "caption": "JsonFormat: Expand All (Unfold All)", "command": "json_format_unfold_all" },
+    {
+        "caption": "Preferences: JsonFormat Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/JsonFormat/JsonFormat.sublime-settings",
+            "default": "// Settings in here override those in \"JsonFormat/JsonFormat.sublime-settings\"\n{\n\t$0\n}\n"
+        }
+    }
+]

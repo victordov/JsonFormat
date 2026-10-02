@@ -1,0 +1,64 @@
+{
+    // Indentation: "auto" (follow the view's tab_size / translate_tabs_to_spaces),
+    // "tab", or a number of spaces (0-16).
+    "indent": "auto",
+
+    // Sort object keys: false, true, or "ignore-case".
+    // Comments move together with the member they belong to.
+    "sort_keys": false,
+
+    // Escape every non-ASCII character in strings as \uXXXX.
+    // Only rewrites strings when enabled; otherwise strings are kept as written.
+    "ensure_ascii": false,
+
+    // Object keys: "preserve" (as written), "always" (always quoted),
+    // "as-needed" (unquoted when a valid identifier - JSON5 only).
+    "quote_keys": "preserve",
+
+    // String quotes: "preserve", "double" or "single" (single = JSON5 only).
+    "quote_style": "preserve",
+
+    // Trailing commas in multi-line objects/arrays:
+    // "preserve", "never" or "always" (always = JSON5/JSONC only).
+    "trailing_commas": "preserve",
+
+    // Keep // and /* */ comments. Minify and strict JSON always drop them.
+    "keep_comments": true,
+
+    // Keep blank lines between members (several collapse into one).
+    // Ignored inside objects whose keys are being sorted.
+    "keep_blank_lines": true,
+
+    // When > 0, arrays that fit on one line within this many columns
+    // (including indentation) are written inline: [1, 2, 3].
+    "inline_width": 0,
+
+    // Apply inline_width to objects as well as arrays.
+    "inline_objects": false,
+
+    // Output standard JSON: quoted keys, double quotes, no comments,
+    // no trailing commas, hex/+1/.5 rewritten. Infinity/NaN are an error.
+    "strict_json": false,
+
+    // Add a newline at the end when formatting a whole file.
+    "final_newline": true,
+
+    // Format automatically before saving files with these extensions.
+    "format_on_save": false,
+    "format_on_save_extensions": [".json", ".jsonc", ".json5"],
+
+    // Don't format or validate files larger than this (KB). 0 = no limit.
+    "max_size_kb": 5120,
+
+    // On a syntax error, show an inline annotation and move the caret there.
+    "show_annotations": true,
+    "jump_to_error": true,
+
+    // Always show the fold arrows in the gutter of JSON files
+    // (Sublime normally shows them only while the mouse is over the gutter).
+    "always_show_fold_buttons": true,
+
+    // Every setting can also be set per project or per view with a
+    // "json_format." prefix, e.g. in a .sublime-project:
+    //   "settings": { "json_format.format_on_save": true, "json_format.indent": 2 }
+}

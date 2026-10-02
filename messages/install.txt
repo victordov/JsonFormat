@@ -1,0 +1,12 @@
+JsonFormat installed.
+
+Open the Command Palette and type "JsonFormat:" to format, minify, convert
+or validate JSON, JSONC and JSON5. Selections are formatted on their own;
+with no selection the whole file is formatted.
+
+Folding: Cmd/Ctrl+Shift+Minus folds JSON to the first level, Cmd/Ctrl+Shift+Equals
+unfolds everything. Format on save is off by default. See
+Preferences > Package Settings > JsonFormat.
+
+JsonFormat runs entirely inside Sublime Text: no external Python, no
+third-party libraries, no network access.

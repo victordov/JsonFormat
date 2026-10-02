@@ -1,0 +1,10 @@
+[
+    // Folding keys are in the platform keymaps; nothing else is bound by default.
+    // Copy an example into Preferences > Key Bindings to enable one:
+    //
+    // { "keys": ["ctrl+alt+j"], "command": "json_format_format",
+    //   "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+    //
+    // { "keys": ["ctrl+alt+shift+j"], "command": "json_format_format", "args": { "minify": true },
+    //   "context": [{ "key": "selector", "operator": "equal", "operand": "source.json" }] },
+]
