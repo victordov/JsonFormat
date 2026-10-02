@@ -116,7 +116,7 @@ class Printer:
                 lines.append(self.base + self._comment(c, 0))
             self._blank(lines, doc.value_nl, 0)
         line = self.base + self._value(doc.value, 0, len(self.base))
-        trailing, rest = self._split(doc.trailing)
+        trailing, rest = self._split(doc.trailing) if self.keep_comments else ([], [])
         if trailing:
             line += ' ' + ' '.join(self._comment(c, 0) for c in trailing)
         lines.append(line)

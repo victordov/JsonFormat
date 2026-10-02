@@ -12,8 +12,8 @@ import unicodedata
 # the default recursion limit of 1000 (the printer recurses the same way).
 MAX_DEPTH = 200
 
-_WHITESPACE = ' \t\v\f ﻿'
-_LINE_TERMINATORS = '\n\r  '
+_WHITESPACE = ' \t\v\f\u00a0\ufeff'
+_LINE_TERMINATORS = '\n\r\u2028\u2029'
 
 _NUMBER_RE = re.compile(r'''
     [+-]?
@@ -26,6 +26,7 @@ _NUMBER_RE = re.compile(r'''
     )
 ''', re.VERBOSE)
 
+_CONTROL_RE = re.compile(r'[\x00-\x1f]')
 _HEX4_RE = re.compile(r'[0-9A-Fa-f]{4}')
 _HEX2_RE = re.compile(r'[0-9A-Fa-f]{2}')
 
@@ -149,7 +150,7 @@ def _is_ident_start(c):
 
 
 def _is_ident_part(c):
-    return (c.isalnum() or c in '$_‌‍'
+    return (c.isalnum() or c in '$_\u200c\u200d'
             or unicodedata.category(c) in ('Mn', 'Mc', 'Pc'))
 
 
@@ -176,7 +177,10 @@ def _read_string(text, i, features):
         m = stop.search(text, i)
         if m is None:
             raise JsonError('Unterminated string', start)
-        out.append(text[i:m.start()])
+        chunk = text[i:m.start()]
+        if _CONTROL_RE.search(chunk):
+            features.add('unescaped control characters in strings')
+        out.append(chunk)
         i = m.start()
         c = text[i]
         if c == quote:
@@ -250,7 +254,11 @@ def tokenize(text, features):
     while True:
         while i < n:
             c = text[i]
-            if c == '\n' or c == ' ' or c == ' ':
+            if c == '\n':
+                nl += 1
+                i += 1
+            elif c == '\u2028' or c == '\u2029':
+                features.add('non-standard whitespace')
                 nl += 1
                 i += 1
             elif c == '\r':
@@ -258,7 +266,11 @@ def tokenize(text, features):
                 i += 1
                 if i < n and text[i] == '\n':
                     i += 1
+            elif c in ' \t':
+                i += 1
             elif c in _WHITESPACE or c.isspace():
+                if c != '\ufeff' or i:  # a leading byte order mark is fine
+                    features.add('non-standard whitespace')
                 i += 1
             else:
                 break

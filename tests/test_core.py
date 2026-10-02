@@ -171,6 +171,11 @@ class Comments(unittest.TestCase):
         self.assertEqual(minify_text(src)[0], '{"a":1,"b":[2]}')
         self.assertEqual(json.loads(strict(src)), {'a': 1, 'b': [2]})
 
+    def test_comments_after_the_root_value_are_dropped(self):
+        src = '{"a": 1} // same line\n/* next line */\n'
+        self.assertEqual(fmt(src, keep_comments=False), '{\n  "a": 1\n}')
+        self.assertEqual(json.loads(strict(src)), {'a': 1})
+
 
 class Layout(unittest.TestCase):
 
@@ -262,6 +267,13 @@ class Json5(unittest.TestCase):
         self.assertEqual(parse(self.SRC).features, {
             'unquoted keys', 'single-quoted strings', 'hexadecimal numbers', 'leading + sign',
             'leading/trailing decimal point', 'Infinity/NaN', 'trailing commas'})
+
+    def test_non_json_characters_reported(self):
+        self.assertEqual(parse('["a\tb"]').features, {'unescaped control characters in strings'})
+        self.assertEqual(strict('["a\tb"]'), '[\n  "a\\tb"\n]')
+        self.assertEqual(parse('[1,\u00a02]').features, {'non-standard whitespace'})
+        self.assertEqual(parse('[1,\u20282]').features, {'non-standard whitespace'})
+        self.assertEqual(parse('\ufeff[1]').features, set())
 
     def test_duplicate_keys_warned(self):
         doc = parse('{"a": 1,\n"a": 2}')
